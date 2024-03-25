@@ -1,0 +1,21 @@
+หลังจากสร้าง folder frontend and backend
+-npm init
+-npm i express dotenv mongoose --save
+-สร้าง app.js ที่ backend
+-ถ้าให้ node app.js run ได้ ต้องใส่ type  module ที่ package.js
+-สร้าง folder config ที่ backend
+-node backend/app.js รันจากหน้า root ปรกติ ต้องใส่ dotenv.config({ path: "backend/config/config.env" }) ที่ app.js
+-ถ้าจะรันด้วย npm start ต้องเปลี่ยน scripts ที่ package.json เป็น   "start": "node backend/app.js"
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+-dependencies ใน package.json เอาไว้ใช้ทั้ง development และ production
+-devDependencies เอาไว้ใช้เฉพาะ  development
+-"start": "node backend/app.js", สำหรับ deploy ขึ้น production และ dev...  npm start
+-"dev": "nodemon backend/app.js " สำหรับ run dev script..npm run dev
+- "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/app.js " set env สำหรับ dev
+ "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/app.js " set env สำหรับ production
