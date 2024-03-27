@@ -6,7 +6,8 @@
 -สร้าง folder config ที่ backend
 -node backend/app.js รันจากหน้า root ปรกติ ต้องใส่ dotenv.config({ path: "backend/config/config.env" }) ที่ app.js
 -ถ้าจะรันด้วย npm start ต้องเปลี่ยน scripts ที่ package.json เป็น   "start": "node backend/app.js"
-
+-นำ seeder ไปใส่ใน package.json
+-run file seeder ด้วยคำสั่ง npm run seeder
 
 
 
