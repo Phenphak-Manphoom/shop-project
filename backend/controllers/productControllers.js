@@ -7,6 +7,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 export const getProducts = catchAsyncErrors(async (req, res) => {
   const resPerPage = 4;
   const apiFilters = new APIFilters(Product, req.query).search().filters();
+  console.log("req?.user", req?.user);
   let products = await apiFilters.query;
   let filteredProductsCount = products.length;
 
@@ -22,6 +23,7 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
 
 //create new product =>/api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res) => {
+  req.body.user = req.user._id;
   const product = await Product.create(req.body);
   res.status(200).json({
     product,
