@@ -3,11 +3,11 @@ import Product from "../models/product.js";
 import APIFilters from "../utils/apiFilter.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
-//get product =>/api/v1/products
+// Create new Product   =>  /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
   const resPerPage = 4;
   const apiFilters = new APIFilters(Product, req.query).search().filters();
-  console.log("req?.user", req?.user);
+
   let products = await apiFilters.query;
   let filteredProductsCount = products.length;
 
@@ -21,16 +21,18 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
   });
 });
 
-//create new product =>/api/v1/admin/products
+// Create new Product   =>  /api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res) => {
   req.body.user = req.user._id;
+
   const product = await Product.create(req.body);
+
   res.status(200).json({
     product,
   });
 });
 
-//get single product details =>/api/v1/admin/products/:id
+// Get single product details   =>  /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req?.params?.id);
 
