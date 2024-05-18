@@ -39,6 +39,7 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
+
   this.password = await bcrypt.hash(this.password, 10);
 });
 
@@ -50,23 +51,25 @@ userSchema.methods.getJwtToken = function () {
 };
 
 //compare user password
-userSchema.methods.comparePassword = async function (enterPassword) {
-  return await bcrypt.compare(enterPassword, this.password);
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 //generate password reset token
 userSchema.methods.getResetPasswordToken = function () {
-  //generate token
+  // Gernerate token
   const resetToken = crypto.randomBytes(20).toString("hex");
 
-  //hash and set to resetPasswordToken field
+  // Hash and set to resetPasswordToken field
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
 
-  //set token expire time
+  // Set token expire time
   this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
+
   return resetToken;
 };
+
 export default mongoose.model("User", userSchema);
