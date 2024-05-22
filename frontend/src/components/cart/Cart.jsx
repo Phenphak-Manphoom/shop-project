@@ -74,13 +74,13 @@ const Cart = () => {
                         />
                       </div>
                       <div className="col-5 col-lg-3">
-                        <Link to={`/products/${item?.product}`}>
+                        <Link to={`/products/{item?.product} THB`}>
                           {" "}
                           {item?.name}{" "}
                         </Link>
                       </div>
                       <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                        <p id="card_item_price">${item?.price}</p>
+                        <p id="card_item_price">฿{item?.price}</p>
                       </div>
                       <div className="col-4 col-lg-3 mt-4 mt-lg-0">
                         <div className="stockCounter d-inline">
@@ -134,7 +134,7 @@ const Cart = () => {
                 <p>
                   Est. total:{" "}
                   <span className="order-summary-values">
-                    $
+                    ฿
                     {cartItems
                       ?.reduce(
                         (acc, item) => acc + item?.quantity * item.price,
@@ -144,7 +144,11 @@ const Cart = () => {
                   </span>
                 </p>
                 <hr />
-                <button id="checkout_btn" className="btn btn-primary w-100"  onClick={checkoutHandler}>
+                <button
+                  id="checkout_btn"
+                  className="btn btn-primary w-100"
+                  onClick={checkoutHandler}
+                >
                   Check out
                 </button>
               </div>
@@ -155,7 +159,5 @@ const Cart = () => {
     </>
   );
 };
-
-
 
 export default Cart;

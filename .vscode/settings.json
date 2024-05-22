@@ -1,4 +1,8 @@
 {
   "files.autoSave": "afterDelay",
-  "editor.fontSize": 17
+  "editor.fontSize": 17,
+  "editor.fontLigatures": false,
+  "notebook.editorOptionsCustomizations": {
+    
+  }
 }
