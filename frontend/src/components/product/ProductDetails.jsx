@@ -4,9 +4,11 @@ import toast from "react-hot-toast";
 import StarRatings from "react-star-ratings";
 import { useGetProductDetailsQuery } from "../../redux/api/productApi";
 import Loader from "../layout/Loader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../redux/features/cartSlice";
 import MetaData from "../layout/MetaData";
+import ListReviews from "../reviews/ListReviews";
+import NewReview from "../reviews/์NewReview";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -19,6 +21,7 @@ const ProductDetails = () => {
     params?.id
   );
   const product = data?.product;
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     setActiveImg(
@@ -123,7 +126,7 @@ const ProductDetails = () => {
           </div>
           <hr />
 
-          <p id="product_price">${product?.price}</p>
+          <p id="product_price">฿{product?.price}</p>
           <div className="stockCounter d-inline">
             <span className="btn btn-danger minus" onClick={decreseQty}>
               -
@@ -169,11 +172,18 @@ const ProductDetails = () => {
             Sold by: <strong>{product?.seller}</strong>
           </p>
 
-          <div className="alert alert-danger my-5" type="alert">
-            Login to post your review.
-          </div>
+          {isAuthenticated ? (
+            <NewReview productId={product?._id} />
+          ) : (
+            <div className="alert alert-danger my-5" type="alert">
+              Login to post your review.
+            </div>
+          )}
         </div>
       </div>
+      {product?.reviews?.length > 0 && (
+        <ListReviews reviews={product?.reviews} />
+      )}
     </>
   );
 };
