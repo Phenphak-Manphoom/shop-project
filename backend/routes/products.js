@@ -44,6 +44,10 @@ router
   .get(isAuthenticatedUser, getProductReviews)
   .put(isAuthenticatedUser, createProductReview);
 
+router
+  .route("/admin/reviews")
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteReview);
+
 router.route("/can_review").get(isAuthenticatedUser, canUserReview);
 
 export default router;
